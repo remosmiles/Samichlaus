@@ -6,7 +6,6 @@
     <title>Weihnachts-Casting: Samichlaus Reel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Weihnachtliche Farben & Animationen */
         body {
             background-color: #064e3b;
             background-image: radial-gradient(circle, #064e3b 0%, #022c22 100%);
@@ -36,14 +35,19 @@
             text-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
         }
 
-        /* Admin Modus versteckt Löschen-Buttons standardmässig */
         .delete-btn { display: none; }
         body.admin-mode .delete-btn { display: inline-block; }
+        
+        /* Eigener Scrollbar für das Skript */
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #991b1b; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #7f1d1d; }
     </style>
 </head>
 <body class="min-h-screen p-4 md:p-8 font-sans relative">
 
-    <div class="relative z-10 max-w-2xl mx-auto space-y-8 mt-4 md:mt-10">
+    <div class="relative z-10 max-w-3xl mx-auto space-y-8 mt-4 md:mt-10">
         
         <!-- Main Card: Header & Formular -->
         <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border-2 xmas-border-gold">
@@ -87,6 +91,64 @@
                         <span>✨</span>
                     </button>
                 </form>
+            </div>
+        </div>
+
+        <!-- Skript Card -->
+        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border-2 border-gray-300">
+            <div class="bg-gray-100 p-4 border-b border-gray-200 flex justify-between items-center cursor-pointer hover:bg-gray-200 transition-colors" onclick="document.getElementById('scriptContent').classList.toggle('hidden')">
+                <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2"><span>🎬</span> Das Video-Skript lesen</h2>
+                <span class="text-gray-500 text-sm font-bold">Aufklappen ▼</span>
+            </div>
+            
+            <div id="scriptContent" class="hidden p-6 custom-scrollbar max-h-96 overflow-y-auto bg-amber-50/30">
+                <div class="prose prose-sm max-w-none text-gray-700 space-y-4">
+                    
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm mb-6">
+                        <h4 class="font-bold text-gray-800 mb-2">Besetzung:</h4>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li><strong>Kontrolleur (Siass):</strong> Streng, pflichtbewusst, aber mit einem Schmunzeln.</li>
+                            <li><strong>Samichlaus:</strong> Die Ruhe selbst, cooler Auftritt, hat alles im Griff.</li>
+                            <li><strong>Schmutzli:</strong> Steht im Hintergrund und passt auf die Tasche auf.</li>
+                        </ul>
+                    </div>
+
+                    <h4 class="font-bold text-red-800 border-b border-red-200 pb-1 mt-6 text-lg">Szene 1: Die Ankunft</h4>
+                    <p class="italic text-gray-500">(Kamera zeigt kurz die Totale des Schwerverkehrszentrums Erstfeld bei Dämmerung. Im Hintergrund glänzt und blinkt ein festlich beleuchteter Laster.)</p>
+                    <p><strong>Bild:</strong> Der leuchtende Samichlaus-Lastwagen rollt langsam auf das Gelände.<br>
+                    <strong>Bild:</strong> Ein Kontrolleur in Warnweste steht bereit, hebt die Kelle und winkt den Lkw professionell auf den Kontrollplatz. Der Motor bremst ab, die Lichter spiegeln sich auf dem nassen Boden.</p>
+
+                    <h4 class="font-bold text-red-800 border-b border-red-200 pb-1 mt-6 text-lg">Szene 2: Die Kontrolle (Das Comedy-Herzstück)</h4>
+                    <p class="italic text-gray-500">(Die Fahrerkabine. Der Kontrolleur tritt heran, klopft an die Scheibe. Der Samichlaus kurbelt das Fenster herunter.)</p>
+                    <p><strong>Kontrolleur:</strong> «Guten Abend. Allgemeine Schwerverkehrskontrolle. Einmal die Papiere bitte – Führerausweis und den Fahrzeugausweis.»<br>
+                    <strong>Samichlaus:</strong> <span class="italic text-gray-500">(Zückt gelassen ein golden schimmerndes Dokument und reicht es rüber)</span> «Guten Abend der Herr. Ist alles im grünen – beziehungsweise im roten Bereich.»<br>
+                    <strong>Kontrolleur:</strong> <span class="italic text-gray-500">(Wirft einen Blick auf den Ausweis, zieht eine Augenbraue hoch)</span> «Mal schauen... Name: Nikolaus. Vorname: Samichlaus. Geburtsdatum: Seit jeher. Gültigkeit: Unbeschränkt... Und der Kollege da hinten?»<br>
+                    <strong>Schmutzli:</strong> <span class="italic text-gray-500">(Nickt kurz grimmig, zeigt ebenfalls seinen Ausweis)</span><br>
+                    <strong>Kontrolleur:</strong> <span class="italic text-gray-500">(Schmunzelt kurz, bleibt aber im Dienst-Modus)</span> «Gut. Dann schauen wir uns gleich mal die Ladung an. Gefährliche Güter an Bord?»<br>
+                    <strong>Samichlaus:</strong> <span class="italic text-gray-500">(Antwortet trocken und absolut ernst)</span> «Nur eine grössere Menge Schokolade.»<br>
+                    <strong>Kontrolleur:</strong> «Verstanden. Machen wir den Kontrollgang.»</p>
+                    
+                    <p class="italic text-gray-500">(Schnitt auf die Ladefläche. Der Samichlaus öffnet die Tore – dahinter stapeln sich Jutesäcke und Geschenke.)</p>
+                    <p><strong>Bild:</strong> Nahaufnahme von Spanngurten, die straff über die Geschenke-Säcke gespannt sind.<br>
+                    <strong>Kontrolleur:</strong> <span class="italic text-gray-500">(Zieht an einem Gurt, prüft die Festigkeit)</span> «Sitzt bombenfest. Da verrutscht selbst im heftigsten Schneesturm nichts. Vorbildlich gesichert.»</p>
+                    
+                    <p class="italic text-gray-500">(Schnitt zurück zum Schreibtisch / Klemmbrett im SVZ-Büro oder draussen am Wagen.)</p>
+                    <p><strong>Kontrolleur:</strong> <span class="italic text-gray-500">(Schreibt den Kontrollrapport, blickt auf)</span> «So, ich bin durch. Ich trage ein: Beanstandungen... keine. Bemerkung: jedoch leichter Guetzli-Überschuss.» <span class="italic text-gray-500">(Nimmt sich grinsend ein Guetzli aus einer Schachtel, die der Chlaus anbietet, und beisst ab)</span>.</p>
+
+                    <h4 class="font-bold text-red-800 border-b border-red-200 pb-1 mt-6 text-lg">Szene 3: Erleichterung</h4>
+                    <p class="italic text-gray-500">(Naheinstellung auf beide)</p>
+                    <p><strong>Bild:</strong> Der Samichlaus und der Kontrolleur schauen sich an und strecken gleichzeitig den Daumen nach oben 👍.<br>
+                    <strong>Bild:</strong> Der Samichlaus lächelt freundlich und zufrieden in die Kamera.</p>
+
+                    <h4 class="font-bold text-red-800 border-b border-red-200 pb-1 mt-6 text-lg">Szene 4: Die Abfahrt</h4>
+                    <p><strong>Bild:</strong> Der Samichlaus winkt noch einmal kurz aus dem offenen Fenster.<br>
+                    <strong>Bild:</strong> Der leuchtende Lastwagen setzt sich in Bewegung, rollt vom SVZ-Gelände und fährt an der Kamera vorbei in die Nacht hinaus. <span class="italic text-gray-500">(Vielleicht hört man im Sounddesign ein dezentes Ho-Ho-Ho statt der normalen Lkw-Hupe)</span>.</p>
+
+                    <h4 class="font-bold text-red-800 border-b border-red-200 pb-1 mt-6 text-lg">Szene 5: Finale</h4>
+                    <p><strong>Bild:</strong> Die roten Rücklichter verschwinden in der Dunkelheit.<br>
+                    <strong>Tafel / eingeblendeter Text:</strong> «Wir wünschen frohe Weihnachten und allzeit gute Fahrt!»<br>
+                    <span class="italic text-gray-500">(Logo / Hinweis auf die Kantonspolizei Uri / SVZ Erstfeld)</span></p>
+                </div>
             </div>
         </div>
 
@@ -165,7 +227,7 @@
         const db = getFirestore(app);
         const signupsRef = collection(db, "reel_signups");
 
-        // --- Admin Logik (Passwort: kapo26) ---
+        // Admin Logik
         document.getElementById('adminLogin').addEventListener('click', () => {
             if (document.body.classList.contains('admin-mode')) {
                 document.body.classList.remove('admin-mode');
@@ -181,7 +243,7 @@
             }
         });
 
-        // Löschen-Funktion (Global verfügbar machen)
+        // Löschen-Funktion
         window.deleteEntry = async (id) => {
             if(confirm("Möchtest du diese Person wirklich löschen?")) {
                 try {
@@ -192,7 +254,6 @@
                 }
             }
         };
-        // -------------------------------------
 
         document.getElementById('castingForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -237,7 +298,6 @@
                 const li = document.createElement('li');
                 li.className = "bg-white px-4 py-3 rounded-lg border border-gray-100 shadow-sm flex justify-between items-center gap-2";
                 
-                // HTML für den Eintrag INKLUSIVE Löschen-Button
                 li.innerHTML = `
                     <div class="flex-1 overflow-hidden">
                         <span class="font-bold text-gray-800 break-words">${data.name}</span> 
