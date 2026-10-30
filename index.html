@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kapo Uri - Samichlaus Reel Casting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        kapo: {
+                            blue: '#002f5d', // Deep police blue
+                            light: '#004a8f',
+                        },
+                        xmas: {
+                            red: '#D32F2F',
+                            green: '#2E7D32'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f3f4f6;
+            /* Subtle snow pattern */
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        
+        /* Toast Animation */
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        .toast-enter {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        .toast-exit {
+            animation: fadeOut 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-kapo-blue text-white shadow-lg relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <!-- Subtle snowflake background for header -->
+            <svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="snow" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <circle cx="20" cy="20" r="2" fill="white"/>
+                    </pattern>
+                </defs>
+                <rect x="0" y="0" width="100%" height="100%" fill="url(#snow)"/>
+            </svg>
+        </div>
+        <div class="max-w-5xl mx-auto px-4 py-6 relative z-10 flex flex-col md:flex-row items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <!-- Police Shield / Badge Icon -->
+                <div class="bg-white p-2 rounded-lg shadow-sm">
+                    <svg class="w-8 h-8 text-kapo-blue" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight">Kapo Uri</h1>
+                    <p class="text-blue-200 text-sm font-medium">Samichlaus Reel Casting</p>
+                </div>
+            </div>
+            <!-- Christmas Hat Decor -->
+            <div class="mt-4 md:mt-0 opacity-80">
+                <svg class="w-12 h-12 text-xmas-red" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.5 9c-.5 0-1-.3-1.3-.7C14.7 5.7 12 5 12 5S9.3 5.7 7.8 8.3c-.3.4-.8.7-1.3.7C4.6 9 3 10.6 3 12.5c0 1.7 1.2 3.1 2.8 3.4l1.4 4.1C7.6 21.1 8.7 22 10 22h4c1.3 0 2.4-.9 2.8-2l1.4-4.1c1.6-.3 2.8-1.7 2.8-3.4 0-1.9-1.6-3.5-3.5-3.5zM12 3c3.9 0 7 2.7 7 6v1c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2V9c0-3.3 3.1-6 7-6zm0 2c-2.8 0-5 2.2-5 5v1h10V10c0-2.8-2.2-5-5-5z"/>
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-5xl mx-auto w-full px-4 py-8">
+        
+        <!-- Loading overlay -->
+        <div id="loadingOverlay" class="fixed inset-0 bg-gray-50/80 z-50 flex flex-col items-center justify-center">
+            <svg class="animate-spin h-10 w-10 text-kapo-blue mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <p class="text-kapo-blue font-semibold animate-pulse">Verbinde mit Server...</p>
+        </div>
+
+        <!-- Section: Overview -->
+        <section class="mb-10">
+            <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-kapo-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                Rollen-Übersicht
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Samichlaus Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col items-center text-center opacity-80">
+                    <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mb-3 text-2xl">🎅</div>
+                    <h3 class="font-bold text-lg text-gray-800">Samichlaus</h3>
+                    <p class="text-sm text-gray-500 mt-1 mb-3">Fix besetzt durch</p>
+                    <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm font-semibold flex items-center gap-1">
+                        <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Damian Walker
+                    </span>
+                </div>
+                <!-- Schmutzli Card -->
+                <div class="bg-white rounded-xl shadow-md border-t-4 border-t-kapo-blue p-5 flex flex-col items-center text-center relative overflow-hidden">
+                    <div class="w-16 h-16 rounded-full bg-gray-800 text-white flex items-center justify-center mb-3 text-2xl">🥷</div>
+                    <h3 class="font-bold text-lg text-gray-800">Schmutzli</h3>
+                    <p class="text-sm text-gray-500 mt-1 mb-3">2 Plätze insgesamt</p>
+                    <span id="badge-schmutzli" class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold transition-colors duration-300">
+                        Lädt...
+                    </span>
+                </div>
+                <!-- Sicherheitsassistent Card -->
+                <div class="bg-white rounded-xl shadow-md border-t-4 border-t-kapo-blue p-5 flex flex-col items-center text-center relative overflow-hidden">
+                    <div class="w-16 h-16 rounded-full bg-blue-100 text-kapo-blue flex items-center justify-center mb-3 text-2xl">👮</div>
+                    <h3 class="font-bold text-lg text-gray-800">Sicherheitsassistent</h3>
+                    <p class="text-sm text-gray-500 mt-1 mb-3">3 Plätze insgesamt</p>
+                    <span id="badge-sicherheitsassistent" class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold transition-colors duration-300">
+                        Lädt...
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Section: Form -->
+            <div class="lg:col-span-4">
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden sticky top-6">
+                    <div class="bg-gray-50 px-6 py-4 border-b border-gray-100">
+                        <h2 class="font-bold text-lg text-gray-800">Jetzt eintragen</h2>
+                        <p class="text-sm text-gray-500">Wähle deine bevorzugte Rolle für das Reel.</p>
+                    </div>
+                    <form id="castingForm" class="p-6 space-y-5">
+                        <div>
+                            <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Vor- und Nachname</label>
+                            <input type="text" id="name" name="name" placeholder="Z.B. Hans Muster" 
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kapo-blue focus:border-kapo-blue outline-none transition-all" required>
+                        </div>
+                        <div>
+                            <label for="role" class="block text-sm font-semibold text-gray-700 mb-1">Wunschrolle</label>
+                            <div class="relative">
+                                <select id="role" name="role" 
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg appearance-none focus:ring-2 focus:ring-kapo-blue focus:border-kapo-blue outline-none transition-all bg-white" required>
+                                    <option value="" disabled selected>Bitte wählen...</option>
+                                    <option value="schmutzli">Schmutzli</option>
+                                    <option value="sicherheitsassistent">Sicherheitsassistent/in</option>
+                                </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" id="submitBtn" 
+                            class="w-full bg-kapo-blue hover:bg-kapo-light text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-colors duration-200 flex items-center justify-center gap-2">
+                            <span>Eintragen</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Section: Realtime List -->
+            <div class="lg:col-span-8">
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 min-h-full">
+                    <div class="flex items-center justify-between mb-6 border-b border-gray-100 pb-4">
+                        <h2 class="font-bold text-xl text-gray-800 flex items-center gap-2">
+                            <span class="relative flex h-3 w-3">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                            </span>
+                            Live-Anmeldungen
+                        </h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        <!-- Schmutzli List -->
+                        <div>
+                            <div class="flex items-center justify-between mb-4 bg-gray-50 px-3 py-2 rounded-lg">
+                                <h3 class="font-bold text-gray-700 flex items-center gap-2">
+                                    <span class="text-xl">🥷</span> Schmutzli
+                                </h3>
+                                <span class="text-xs font-semibold text-gray-500 bg-gray-200 px-2 py-1 rounded-md" id="count-schmutzli">0/2</span>
+                            </div>
+                            <ul id="list-schmutzli" class="space-y-3">
+                                <!-- Populated by JS -->
+                                <li class="text-gray-400 text-sm italic py-2">Noch keine Anmeldungen.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Sicherheitsassistent List -->
+                        <div>
+                            <div class="flex items-center justify-between mb-4 bg-gray-50 px-3 py-2 rounded-lg">
+                                <h3 class="font-bold text-gray-700 flex items-center gap-2">
+                                    <span class="text-xl">👮</span> Sicherheitsassistent
+                                </h3>
+                                <span class="text-xs font-semibold text-gray-500 bg-gray-200 px-2 py-1 rounded-md" id="count-sicherheitsassistent">0/3</span>
+                            </div>
+                            <ul id="list-sicherheitsassistent" class="space-y-3">
+                                <!-- Populated by JS -->
+                                <li class="text-gray-400 text-sm italic py-2">Noch keine Anmeldungen.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Firebase & Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global environment variables provided by the platform
+        const appId = typeof window.__app_id !== 'undefined' ? window.__app_id : 'kapo-uri-samichlaus';
+        const firebaseConfigStr = typeof window.__firebase_config !== 'undefined' ? window.__firebase_config : null;
+        const initialToken = typeof window.__initial_auth_token !== 'undefined' ? window.__initial_auth_token : null;
+
+        // Fallback config if none provided (prevents crash, but real platform supplies it)
+        const fallbackConfig = {
+            apiKey: "mock-key",
+            projectId: "mock-project",
+        };
+        const firebaseConfig = firebaseConfigStr ? JSON.parse(firebaseConfigStr) : fallbackConfig;
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+        let registrations = [];
+
+        // DOM Elements
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const form = document.getElementById('castingForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const badgeSchmutzli = document.getElementById('badge-schmutzli');
+        const badgeSicherheits = document.getElementById('badge-sicherheitsassistent');
+        const listSchmutzli = document.getElementById('list-schmutzli');
+        const listSicherheits = document.getElementById('list-sicherheitsassistent');
+        const countSchmutzli = document.getElementById('count-schmutzli');
+        const countSicherheits = document.getElementById('count-sicherheitsassistent');
+
+        // Toast Notification System
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const isSuccess = type === 'success';
+            
+            toast.className = `toast-enter flex items-center p-4 rounded-lg shadow-lg text-white ${isSuccess ? 'bg-green-600' : 'bg-red-600'} max-w-sm w-full`;
+            toast.innerHTML = `
+                <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    ${isSuccess 
+                        ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>' 
+                        : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>'
+                    }
+                </svg>
+                <span class="font-medium">${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.replace('toast-enter', 'toast-exit');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        // Initialize App
+        async function init() {
+            try {
+                if (initialToken) {
+                    await signInWithCustomToken(auth, initialToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                currentUser = auth.currentUser;
+                
+                // Hide loading
+                loadingOverlay.classList.add('hidden');
+                
+                // Start listening to real-time data
+                listenToData();
+            } catch (error) {
+                console.error("Authentication Error:", error);
+                loadingOverlay.querySelector('p').innerText = "Verbindungsfehler. Bitte Seite neu laden.";
+                loadingOverlay.querySelector('svg').classList.remove('animate-spin');
+                loadingOverlay.querySelector('svg').classList.add('text-red-500');
+                showToast("Konnte keine sichere Verbindung herstellen.", "error");
+            }
+        }
+
+        // Realtime Listener
+        function listenToData() {
+            if (!currentUser) return;
+            
+            // STRICT PATH REQUIREMENT: /artifacts/{appId}/public/data/registrations
+            const regsRef = collection(db, 'artifacts', appId, 'public', 'data', 'registrations');
+            
+            onSnapshot(regsRef, (snapshot) => {
+                registrations = [];
+                snapshot.forEach(doc => {
+                    registrations.push({ id: doc.id, ...doc.data() });
+                });
+                
+                // Sort by timestamp in memory (First come, first serve)
+                registrations.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+                
+                updateUI();
+            }, (error) => {
+                console.error("Firestore Listen Error:", error);
+                showToast("Fehler beim Abrufen der Live-Daten.", "error");
+            });
+        }
+
+        // Update UI logic
+        function updateUI() {
+            const schmutzlis = registrations.filter(r => r.role === 'schmutzli');
+            const sicherheits = registrations.filter(r => r.role === 'sicherheitsassistent');
+
+            const maxSchmutzli = 2;
+            const maxSicherheits = 3;
+
+            const openSchmutzli = Math.max(0, maxSchmutzli - schmutzlis.length);
+            const openSicherheits = Math.max(0, maxSicherheits - sicherheits.length);
+
+            // Update Badges
+            updateBadge(badgeSchmutzli, openSchmutzli, maxSchmutzli);
+            updateBadge(badgeSicherheits, openSicherheits, maxSicherheits);
+
+            // Update Counters
+            countSchmutzli.innerText = `${schmutzlis.length}/${maxSchmutzli}`;
+            countSicherheits.innerText = `${sicherheits.length}/${maxSicherheits}`;
+
+            // Update Lists
+            renderList(listSchmutzli, schmutzlis, '🥷');
+            renderList(listSicherheits, sicherheits, '👮');
+        }
+
+        function updateBadge(el, open, total) {
+            if (open > 0) {
+                el.innerText = `${open} Platz offen`;
+                el.className = "px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold transition-colors duration-300";
+            } else {
+                el.innerText = `Besetzt`;
+                el.className = "px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-semibold transition-colors duration-300";
+            }
+        }
+
+        function renderList(container, items, icon) {
+            container.innerHTML = '';
+            if (items.length === 0) {
+                container.innerHTML = '<li class="text-gray-400 text-sm italic py-2 text-center border border-dashed border-gray-200 rounded-lg">Noch keine Anmeldungen.</li>';
+                return;
+            }
+
+            items.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.className = "flex items-center gap-3 bg-white p-3 rounded-xl border border-gray-100 shadow-sm animate-[slideIn_0.3s_ease-out]";
+                
+                // Format Date nicely
+                const dateObj = new Date(item.timestamp);
+                const timeString = dateObj.toLocaleTimeString('de-CH', { hour: '2-digit', minute: '2-digit' });
+                const dateString = dateObj.toLocaleDateString('de-CH', { day: '2-digit', month: '2-digit' });
+
+                li.innerHTML = `
+                    <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center flex-shrink-0 border border-gray-100 text-lg">
+                        ${icon}
+                    </div>
+                    <div class="flex-grow min-w-0">
+                        <p class="text-sm font-bold text-gray-800 truncate">${escapeHTML(item.name)}</p>
+                        <p class="text-xs text-gray-500">Angemeldet am ${dateString}, ${timeString} Uhr</p>
+                    </div>
+                    <div class="text-xs font-bold text-gray-400 bg-gray-50 px-2 py-1 rounded">
+                        #${index + 1}
+                    </div>
+                `;
+                container.appendChild(li);
+            });
+        }
+
+        // Basic HTML Escaping for security
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag])
+            );
+        }
+
+        // Form Submit Handler
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!currentUser) {
+                showToast("Nicht autorisiert. Bitte warten Sie auf die Verbindung.", "error");
+                return;
+            }
+
+            const nameInput = document.getElementById('name').value.trim();
+            const roleInput = document.getElementById('role').value;
+
+            if (!nameInput || !roleInput) {
+                showToast("Bitte füllen Sie alle Felder aus.", "error");
+                return;
+            }
+
+            // Visual feedback on button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Wird gespeichert...
+            `;
+            submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
+
+            try {
+                const regsRef = collection(db, 'artifacts', appId, 'public', 'data', 'registrations');
+                await addDoc(regsRef, {
+                    name: nameInput,
+                    role: roleInput,
+                    timestamp: new Date().toISOString(),
+                    userId: currentUser.uid // For unique identification if needed
+                });
+
+                form.reset();
+                showToast("Erfolgreich für das Casting eingetragen!");
+                
+            } catch (error) {
+                console.error("Submit Error:", error);
+                showToast("Ein Fehler ist aufgetreten. Bitte erneut versuchen.", "error");
+            } finally {
+                // Reset Button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `
+                    <span>Eintragen</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                `;
+                submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+            }
+        });
+
+        // Run application
+        window.addEventListener('DOMContentLoaded', init);
+
+    </script>
+</body>
+</html>
