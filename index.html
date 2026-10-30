@@ -8,7 +8,7 @@
     <style>
         /* Weihnachtliche Farben & Animationen */
         body {
-            background-color: #064e3b; /* Tiefes Tannengrün */
+            background-color: #064e3b;
             background-image: radial-gradient(circle, #064e3b 0%, #022c22 100%);
             overflow-x: hidden;
         }
@@ -18,7 +18,6 @@
         .xmas-gold { color: #facc15; }
         .xmas-border-gold { border-color: #facc15; }
 
-        /* Schneeflocken & Lebkuchen Animation */
         @keyframes fall {
             0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
@@ -28,28 +27,27 @@
             position: fixed;
             top: -10vh;
             z-index: 0;
-            pointer-events: none; /* Verhindert, dass die Animation Klicks blockiert */
+            pointer-events: none;
             animation: fall linear infinite;
             filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
         }
 
-        /* Glüh-Effekt für den Titel */
         .text-glow {
             text-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
         }
+
+        /* Admin Modus versteckt Löschen-Buttons standardmässig */
+        .delete-btn { display: none; }
+        body.admin-mode .delete-btn { display: inline-block; }
     </style>
 </head>
 <body class="min-h-screen p-4 md:p-8 font-sans relative">
 
-    <!-- Container für den Inhalt (z-10 damit es über dem Schnee liegt) -->
     <div class="relative z-10 max-w-2xl mx-auto space-y-8 mt-4 md:mt-10">
         
         <!-- Main Card: Header & Formular -->
         <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border-2 xmas-border-gold">
-            
-            <!-- Weihnachtlicher Header -->
             <div class="xmas-red text-white p-8 text-center border-b-4 xmas-border-gold relative overflow-hidden">
-                <!-- Dekorative Kreise im Hintergrund -->
                 <div class="absolute top-0 left-0 w-32 h-32 bg-red-900 rounded-full mix-blend-multiply filter blur-xl opacity-50 transform -translate-x-1/2 -translate-y-1/2"></div>
                 <div class="absolute bottom-0 right-0 w-32 h-32 bg-red-900 rounded-full mix-blend-multiply filter blur-xl opacity-50 transform translate-x-1/2 translate-y-1/2"></div>
                 
@@ -57,7 +55,6 @@
                 <p class="text-md font-medium text-red-100 tracking-wide uppercase">Kantonspolizei Uri - Social Media</p>
             </div>
             
-            <!-- Rollen Übersicht -->
             <div class="p-6 bg-red-50 border-b border-red-100 text-center">
                 <h2 class="font-bold text-lg xmas-text-red mb-3 flex items-center justify-center gap-2">
                     <span>🎄</span> Wir suchen für das Reel: <span>🎄</span>
@@ -69,7 +66,6 @@
                 <p class="text-gray-500 text-xs mt-3 italic">🎅 Samichlaus ist bereits besetzt (Damian Walker)</p>
             </div>
 
-            <!-- Formular -->
             <div class="p-8">
                 <form id="castingForm" class="space-y-5">
                     <div>
@@ -102,7 +98,6 @@
             </div>
             
             <div class="grid md:grid-cols-2 gap-8">
-                <!-- Spalte: Sicherheitsassistenten -->
                 <div class="bg-green-50 rounded-xl p-5 border border-green-100 shadow-inner">
                     <h3 class="font-bold text-green-900 border-b-2 border-green-200 pb-2 mb-4 flex justify-between items-center">
                         <span>👮 SiAss</span>
@@ -113,7 +108,6 @@
                     </ul>
                 </div>
                 
-                <!-- Spalte: Schmutzli -->
                 <div class="bg-red-50 rounded-xl p-5 border border-red-100 shadow-inner">
                     <h3 class="font-bold xmas-text-red border-b-2 border-red-200 pb-2 mb-4 flex justify-between items-center">
                         <span>🧹 Schmutzli</span>
@@ -125,21 +119,26 @@
                 </div>
             </div>
         </div>
+
+        <!-- Versteckter Admin Button -->
+        <div class="text-center mt-4 pb-8">
+            <button id="adminLogin" class="text-white/30 hover:text-white/80 transition-colors text-sm">🔒</button>
+        </div>
     </div>
 
-    <!-- Schnee & Lebkuchen Generator -->
+    <!-- Schnee Generator -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const symbols = ['❄️', '❄️', '🍪', '❄️', '⭐', '❄️']; // Mehr Schnee als Kekse
+            const symbols = ['❄️', '❄️', '🍪', '❄️', '⭐', '❄️'];
             const container = document.body;
-            const amount = window.innerWidth < 768 ? 20 : 45; // Weniger auf Handys
+            const amount = window.innerWidth < 768 ? 20 : 45;
 
             for (let i = 0; i < amount; i++) {
                 let el = document.createElement('div');
                 el.className = 'falling-item';
                 el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
                 el.style.left = Math.random() * 100 + 'vw';
-                el.style.animationDuration = (Math.random() * 5 + 5) + 's'; // 5 bis 10 Sekunden
+                el.style.animationDuration = (Math.random() * 5 + 5) + 's';
                 el.style.animationDelay = (Math.random() * 5) + 's';
                 el.style.fontSize = (Math.random() * 1.5 + 0.8) + 'rem';
                 el.style.opacity = (Math.random() * 0.6 + 0.4).toString();
@@ -151,9 +150,8 @@
     <!-- Firebase SDK & Logik -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // Deine exakte Firebase Konfiguration
         const firebaseConfig = {
             apiKey: "AIzaSyB06LAgecdwUdTjWiZwLDClqO46sqUggsA",
             authDomain: "samichlaus-reel.firebaseapp.com",
@@ -167,7 +165,35 @@
         const db = getFirestore(app);
         const signupsRef = collection(db, "reel_signups");
 
-        // Formular absenden
+        // --- Admin Logik (Passwort: kapo26) ---
+        document.getElementById('adminLogin').addEventListener('click', () => {
+            if (document.body.classList.contains('admin-mode')) {
+                document.body.classList.remove('admin-mode');
+                document.getElementById('adminLogin').innerText = "🔒";
+                return;
+            }
+            const pin = prompt("Admin Passwort eingeben:");
+            if (pin === "kapo26") {
+                document.body.classList.add('admin-mode');
+                document.getElementById('adminLogin').innerText = "🔓 Admin aktiv";
+            } else if (pin) {
+                alert("Falsches Passwort!");
+            }
+        });
+
+        // Löschen-Funktion (Global verfügbar machen)
+        window.deleteEntry = async (id) => {
+            if(confirm("Möchtest du diese Person wirklich löschen?")) {
+                try {
+                    await deleteDoc(doc(db, "reel_signups", id));
+                } catch(e) {
+                    alert("Fehler beim Löschen.");
+                    console.error(e);
+                }
+            }
+        };
+        // -------------------------------------
+
         document.getElementById('castingForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const name = document.getElementById('name').value;
@@ -187,14 +213,13 @@
                 e.target.reset();
             } catch (error) {
                 console.error("Fehler beim Speichern: ", error);
-                alert("Ho Ho Ho! Da lief was schief. Bitte prüfe die Datenbank-Regeln (Testmodus).");
+                alert("Ho Ho Ho! Da lief was schief.");
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = originalText;
             }
         });
 
-        // Live-Daten auslesen
         const q = query(signupsRef, orderBy("timestamp", "asc"));
         
         onSnapshot(q, (snapshot) => {
@@ -210,9 +235,18 @@
             snapshot.forEach((doc) => {
                 const data = doc.data();
                 const li = document.createElement('li');
-                // Styling für den einzelnen Listeneintrag
-                li.className = "bg-white px-4 py-3 rounded-lg border border-gray-100 shadow-sm flex justify-between items-center";
-                li.innerHTML = `<span class="font-bold text-gray-800">${data.name}</span> <span class="text-xs text-gray-400 font-medium bg-gray-50 px-2 py-1 rounded">${data.timestamp ? new Date(data.timestamp.toDate()).toLocaleTimeString('de-CH', {hour: '2-digit', minute:'2-digit'}) : 'Neu'}</span>`;
+                li.className = "bg-white px-4 py-3 rounded-lg border border-gray-100 shadow-sm flex justify-between items-center gap-2";
+                
+                // HTML für den Eintrag INKLUSIVE Löschen-Button
+                li.innerHTML = `
+                    <div class="flex-1 overflow-hidden">
+                        <span class="font-bold text-gray-800 break-words">${data.name}</span> 
+                        <span class="text-xs text-gray-400 font-medium bg-gray-50 px-2 py-1 rounded ml-2 whitespace-nowrap">${data.timestamp ? new Date(data.timestamp.toDate()).toLocaleTimeString('de-CH', {hour: '2-digit', minute:'2-digit'}) : 'Neu'}</span>
+                    </div>
+                    <button onclick="deleteEntry('${doc.id}')" class="delete-btn bg-red-100 text-red-700 hover:bg-red-200 px-2 py-1 rounded text-xs font-bold shrink-0 transition-colors">
+                        Löschen
+                    </button>
+                `;
                 
                 if (data.role === 'Sicherheitsassistent') {
                     listSicher.appendChild(li);
