@@ -38,7 +38,6 @@
         .delete-btn { display: none; }
         body.admin-mode .delete-btn { display: inline-block; }
         
-        /* Eigener Scrollbar für das Skript */
         .custom-scrollbar::-webkit-scrollbar { width: 8px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #991b1b; border-radius: 4px; }
@@ -47,7 +46,7 @@
 </head>
 <body class="min-h-screen p-4 md:p-8 font-sans relative">
 
-    <div class="relative z-10 max-w-3xl mx-auto space-y-8 mt-4 md:mt-10">
+    <div class="relative z-10 max-w-4xl mx-auto space-y-8 mt-4 md:mt-10">
         
         <!-- Main Card: Header & Formular -->
         <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border-2 xmas-border-gold">
@@ -66,6 +65,7 @@
                 <div class="flex flex-wrap justify-center gap-4 text-sm">
                     <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-red-200 font-semibold xmas-text-red">3x Sicherheitsassistent/in</span>
                     <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-red-200 font-semibold xmas-text-red">2x Schmutzli</span>
+                    <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-red-200 font-semibold xmas-text-red">1x Techniker/in</span>
                 </div>
                 <p class="text-gray-500 text-xs mt-3 italic">🎅 Samichlaus ist bereits besetzt (Damian Walker)</p>
             </div>
@@ -83,6 +83,7 @@
                             <option value="" disabled selected>Bitte Rolle auswählen...</option>
                             <option value="Sicherheitsassistent">👮 Sicherheitsassistent/in</option>
                             <option value="Schmutzli">🧹 Schmutzli</option>
+                            <option value="Techniker">🎥 Techniker/in (Kamera/Licht)</option>
                         </select>
                     </div>
 
@@ -107,7 +108,7 @@
                     <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm mb-6">
                         <h4 class="font-bold text-gray-800 mb-2">Besetzung:</h4>
                         <ul class="list-disc list-inside space-y-1">
-                            <li><strong>Kontrolleur (Siass):</strong> Streng, pflichtbewusst, aber mit einem Schmunzeln.</li>
+                            <li><strong>Kontrolleur (SiAss):</strong> Streng, pflichtbewusst, aber mit einem Schmunzeln.</li>
                             <li><strong>Samichlaus:</strong> Die Ruhe selbst, cooler Auftritt, hat alles im Griff.</li>
                             <li><strong>Schmutzli:</strong> Steht im Hintergrund und passt auf die Tasche auf.</li>
                         </ul>
@@ -159,7 +160,8 @@
                 <div class="h-1 w-24 bg-green-800 mx-auto mt-2 rounded-full"></div>
             </div>
             
-            <div class="grid md:grid-cols-2 gap-8">
+            <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
+                <!-- Spalte: Sicherheitsassistenten -->
                 <div class="bg-green-50 rounded-xl p-5 border border-green-100 shadow-inner">
                     <h3 class="font-bold text-green-900 border-b-2 border-green-200 pb-2 mb-4 flex justify-between items-center">
                         <span>👮 SiAss</span>
@@ -170,12 +172,24 @@
                     </ul>
                 </div>
                 
+                <!-- Spalte: Schmutzli -->
                 <div class="bg-red-50 rounded-xl p-5 border border-red-100 shadow-inner">
                     <h3 class="font-bold xmas-text-red border-b-2 border-red-200 pb-2 mb-4 flex justify-between items-center">
                         <span>🧹 Schmutzli</span>
                         <span class="xmas-red text-white text-xs px-2 py-1 rounded-full"><span id="count-schmutzli">0</span> / 2</span>
                     </h3>
                     <ul id="list-schmutzli" class="space-y-3 min-h-[3rem]">
+                        <li class="text-sm italic text-gray-400 text-center py-2">Wartet auf Einträge...</li>
+                    </ul>
+                </div>
+
+                <!-- Spalte: Techniker -->
+                <div class="bg-blue-50 rounded-xl p-5 border border-blue-100 shadow-inner md:col-span-2 lg:col-span-1">
+                    <h3 class="font-bold text-blue-900 border-b-2 border-blue-200 pb-2 mb-4 flex justify-between items-center">
+                        <span>🎥 Technik</span>
+                        <span class="bg-blue-800 text-white text-xs px-2 py-1 rounded-full"><span id="count-technik">0</span> / 1</span>
+                    </h3>
+                    <ul id="list-technik" class="space-y-3 min-h-[3rem]">
                         <li class="text-sm italic text-gray-400 text-center py-2">Wartet auf Einträge...</li>
                     </ul>
                 </div>
@@ -286,12 +300,15 @@
         onSnapshot(q, (snapshot) => {
             const listSicher = document.getElementById('list-sicher');
             const listSchmutzli = document.getElementById('list-schmutzli');
+            const listTechnik = document.getElementById('list-technik');
             
             listSicher.innerHTML = '';
             listSchmutzli.innerHTML = '';
+            listTechnik.innerHTML = '';
             
             let countSicher = 0;
             let countSchmutzli = 0;
+            let countTechnik = 0;
 
             snapshot.forEach((doc) => {
                 const data = doc.data();
@@ -314,15 +331,23 @@
                 } else if (data.role === 'Schmutzli') {
                     listSchmutzli.appendChild(li);
                     countSchmutzli++;
+                } else if (data.role === 'Techniker') {
+                    listTechnik.appendChild(li);
+                    countTechnik++;
                 }
             });
 
             document.getElementById('count-sicher').innerText = countSicher;
             document.getElementById('count-schmutzli').innerText = countSchmutzli;
+            document.getElementById('count-technik').innerText = countTechnik;
 
             if(countSicher === 0) listSicher.innerHTML = '<li class="text-sm italic text-gray-400 text-center py-2">Noch keine Einträge</li>';
             if(countSchmutzli === 0) listSchmutzli.innerHTML = '<li class="text-sm italic text-gray-400 text-center py-2">Noch keine Einträge</li>';
+            if(countTechnik === 0) listTechnik.innerHTML = '<li class="text-sm italic text-gray-400 text-center py-2">Noch keine Einträge</li>';
         });
     </script>
 </body>
 </html>
+```Ich habe diese E-Mail für dich entworfen.
+
+http://googleusercontent.com/action_card_content/1f87d363-0da2-49c0-9eff-aa65f1e22ca0
