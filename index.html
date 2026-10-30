@@ -62,12 +62,17 @@
                 <h2 class="font-bold text-lg xmas-text-red mb-3 flex items-center justify-center gap-2">
                     <span>🎄</span> Wir suchen für das Reel: <span>🎄</span>
                 </h2>
-                <div class="flex flex-wrap justify-center gap-4 text-sm">
-                    <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-red-200 font-semibold xmas-text-red">3x Sicherheitsassistent/in</span>
+                <div class="flex flex-wrap justify-center gap-3 text-sm mb-5">
+                    <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-red-200 font-semibold xmas-text-red">3x Sicherheitsassistent/in (Polizeil. Kontrolle)</span>
                     <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-red-200 font-semibold xmas-text-red">2x Schmutzli</span>
-                    <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-red-200 font-semibold xmas-text-red">1x Techniker/in</span>
+                    <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-red-200 font-semibold xmas-text-red">1x Fahrzeugtechnik Experte</span>
                 </div>
-                <p class="text-gray-500 text-xs mt-3 italic">🎅 Samichlaus ist bereits besetzt (Damian Walker)</p>
+                
+                <div class="space-y-2 text-sm text-gray-800 bg-white/70 p-4 rounded-xl border border-red-200 inline-block text-left shadow-sm">
+                    <p>🚛 <strong>Fahrzeug:</strong> Lastwagen der Gisler Transporte</p>
+                    <p>🎅 <strong>Samichlaus:</strong> Bereits besetzt (Damian Walker)</p>
+                    <p>💡 <strong>Skript & Idee:</strong> Das Skript steht noch nicht zu 100% fest. Wenn ihr gute Ideen habt, werden diese jederzeit sehr gerne gehört!</p>
+                </div>
             </div>
 
             <div class="p-8">
@@ -83,7 +88,7 @@
                             <option value="" disabled selected>Bitte Rolle auswählen...</option>
                             <option value="Sicherheitsassistent">👮 Sicherheitsassistent/in</option>
                             <option value="Schmutzli">🧹 Schmutzli</option>
-                            <option value="Techniker">🎥 Techniker/in (Kamera/Licht)</option>
+                            <option value="Techniker">🔧 Fahrzeugtechnik Experte (Techniker)</option>
                         </select>
                     </div>
 
@@ -98,13 +103,17 @@
         <!-- Skript Card -->
         <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border-2 border-gray-300">
             <div class="bg-gray-100 p-4 border-b border-gray-200 flex justify-between items-center cursor-pointer hover:bg-gray-200 transition-colors" onclick="document.getElementById('scriptContent').classList.toggle('hidden')">
-                <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2"><span>🎬</span> Das Video-Skript lesen</h2>
+                <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2"><span>🎬</span> Das Video-Skript (Entwurf) lesen</h2>
                 <span class="text-gray-500 text-sm font-bold">Aufklappen ▼</span>
             </div>
             
             <div id="scriptContent" class="hidden p-6 custom-scrollbar max-h-96 overflow-y-auto bg-amber-50/30">
                 <div class="prose prose-sm max-w-none text-gray-700 space-y-4">
                     
+                    <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200 shadow-sm mb-6 text-yellow-800">
+                        <strong>Hinweis:</strong> Dieses Skript ist ein erster Entwurf. Eure Vorschläge und guten Ideen werden jederzeit gerne gehört und können noch eingebaut werden!
+                    </div>
+
                     <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm mb-6">
                         <h4 class="font-bold text-gray-800 mb-2">Besetzung:</h4>
                         <ul class="list-disc list-inside space-y-1">
@@ -115,7 +124,7 @@
                     </div>
 
                     <h4 class="font-bold text-red-800 border-b border-red-200 pb-1 mt-6 text-lg">Szene 1: Die Ankunft</h4>
-                    <p class="italic text-gray-500">(Kamera zeigt kurz die Totale des Schwerverkehrszentrums Erstfeld bei Dämmerung. Im Hintergrund glänzt und blinkt ein festlich beleuchteter Laster.)</p>
+                    <p class="italic text-gray-500">(Kamera zeigt kurz die Totale des Schwerverkehrszentrums Erstfeld bei Dämmerung. Im Hintergrund glänzt und blinkt ein festlich beleuchteter Laster (Gisler Transporte).)</p>
                     <p><strong>Bild:</strong> Der leuchtende Samichlaus-Lastwagen rollt langsam auf das Gelände.<br>
                     <strong>Bild:</strong> Ein Kontrolleur in Warnweste steht bereit, hebt die Kelle und winkt den Lkw professionell auf den Kontrollplatz. Der Motor bremst ab, die Lichter spiegeln sich auf dem nassen Boden.</p>
 
@@ -186,7 +195,7 @@
                 <!-- Spalte: Techniker -->
                 <div class="bg-blue-50 rounded-xl p-5 border border-blue-100 shadow-inner md:col-span-2 lg:col-span-1">
                     <h3 class="font-bold text-blue-900 border-b-2 border-blue-200 pb-2 mb-4 flex justify-between items-center">
-                        <span>🎥 Technik</span>
+                        <span>🔧 Fz-Technik</span>
                         <span class="bg-blue-800 text-white text-xs px-2 py-1 rounded-full"><span id="count-technik">0</span> / 1</span>
                     </h3>
                     <ul id="list-technik" class="space-y-3 min-h-[3rem]">
@@ -348,6 +357,3 @@
     </script>
 </body>
 </html>
-```Ich habe diese E-Mail für dich entworfen.
-
-http://googleusercontent.com/action_card_content/1f87d363-0da2-49c0-9eff-aa65f1e22ca0
