@@ -3,236 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weihnachts-Casting: Samichlaus Reel</title>
+    <title>Weihnachts-Casting: Samichlaus Reel | Kapo Uri</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #064e3b;
-            background-image: radial-gradient(circle, #064e3b 0%, #022c22 100%);
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            background-image: radial-gradient(circle at top, #064e3b 0%, #0f172a 100%);
             overflow-x: hidden;
+            color: #334155;
         }
 
-        .xmas-red { background-color: #991b1b; }
-        .xmas-text-red { color: #991b1b; }
-        .xmas-gold { color: #facc15; }
-        .xmas-border-gold { border-color: #facc15; }
-
+        /* Subtiler, professioneller Schnee-Effekt */
         @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(-10vh) translateX(0); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(110vh) translateX(20px); opacity: 0; }
         }
 
-        .falling-item {
+        .snow-flake {
             position: fixed;
             top: -10vh;
             z-index: 0;
             pointer-events: none;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
             animation: fall linear infinite;
-            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
         }
 
-        .text-glow {
-            text-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
         .delete-btn { display: none; }
-        body.admin-mode .delete-btn { display: inline-block; }
-        
-        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #991b1b; border-radius: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #7f1d1d; }
+        body.admin-mode .delete-btn { display: inline-flex; }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        .script-badge {
+            @apply inline-block px-2 py-0.5 text-xs font-bold rounded-md uppercase tracking-wider mb-2;
+        }
     </style>
 </head>
-<body class="min-h-screen p-4 md:p-8 font-sans relative">
+<body class="min-h-screen p-4 md:p-8 relative">
 
-    <div class="relative z-10 max-w-4xl mx-auto space-y-8 mt-4 md:mt-10">
+    <div class="relative z-10 max-w-5xl mx-auto space-y-8 mt-4 md:mt-8">
         
-        <!-- Main Card: Header & Formular -->
-        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border-2 xmas-border-gold">
-            <div class="xmas-red text-white p-8 text-center border-b-4 xmas-border-gold relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-32 h-32 bg-red-900 rounded-full mix-blend-multiply filter blur-xl opacity-50 transform -translate-x-1/2 -translate-y-1/2"></div>
-                <div class="absolute bottom-0 right-0 w-32 h-32 bg-red-900 rounded-full mix-blend-multiply filter blur-xl opacity-50 transform translate-x-1/2 translate-y-1/2"></div>
-                
-                <h1 class="text-4xl md:text-5xl font-extrabold mb-3 font-serif text-glow xmas-gold">Samichlaus Casting</h1>
-                <p class="text-md font-medium text-red-100 tracking-wide uppercase">Kantonspolizei Uri - Social Media</p>
+        <!-- Header & Casting Formular -->
+        <div class="glass-card rounded-2xl overflow-hidden">
+            <!-- Offizieller Header -->
+            <div class="bg-gradient-to-r from-red-900 to-red-800 text-white p-8 relative overflow-hidden flex flex-col md:flex-row items-center justify-between border-b-4 border-amber-500">
+                <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+                <div class="relative z-10 text-center md:text-left mb-4 md:mb-0">
+                    <p class="text-sm font-semibold text-amber-400 tracking-widest uppercase mb-1">Kantonspolizei Uri • SVZ Erstfeld</p>
+                    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">Samichlaus Reel Casting</h1>
+                </div>
+                <div class="relative z-10 flex items-center justify-center bg-white/10 px-4 py-2 rounded-lg backdrop-blur-sm border border-white/20">
+                    <span class="text-2xl mr-3">🎥</span>
+                    <div class="text-left">
+                        <p class="text-xs text-red-200 uppercase font-bold tracking-wider">Produktion</p>
+                        <p class="font-semibold">Social Media Team</p>
+                    </div>
+                </div>
             </div>
             
-            <div class="p-6 bg-red-50 border-b border-red-100 text-center">
-                <h2 class="font-bold text-lg xmas-text-red mb-3 flex items-center justify-center gap-2">
-                    <span>🎄</span> Wir suchen für das Reel: <span>🎄</span>
-                </h2>
-                <div class="flex flex-wrap justify-center gap-3 text-sm mb-5">
-                    <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-red-200 font-semibold xmas-text-red">3x Sicherheitsassistent/in (Polizeil. Kontrolle)</span>
-                    <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-red-200 font-semibold xmas-text-red">2x Schmutzli</span>
-                    <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-red-200 font-semibold xmas-text-red">1x Fahrzeugtechnik Experte</span>
-                </div>
-                
-                <div class="space-y-2 text-sm text-gray-800 bg-white/70 p-4 rounded-xl border border-red-200 inline-block text-left shadow-sm">
-                    <p>🚛 <strong>Fahrzeug:</strong> Lastwagen der Gisler Transporte</p>
-                    <p>🎅 <strong>Samichlaus:</strong> Bereits besetzt (Damian Walker)</p>
-                    <p>💡 <strong>Skript & Idee:</strong> Das Skript steht noch nicht zu 100% fest. Wenn ihr gute Ideen habt, werden diese jederzeit sehr gerne gehört!</p>
+            <!-- Info Banner -->
+            <div class="bg-slate-50 p-6 border-b border-slate-200">
+                <div class="flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
+                    <div>
+                        <h2 class="font-bold text-slate-800 text-lg mb-3 flex items-center gap-2">
+                            <span class="text-amber-500">⭐</span> Gesuchte Rollen
+                        </h2>
+                        <div class="flex flex-wrap gap-2 text-sm">
+                            <span class="bg-white px-3 py-1.5 rounded-md shadow-sm border border-slate-200 font-semibold text-slate-700">👮 3x SiAss (Kontrolle)</span>
+                            <span class="bg-white px-3 py-1.5 rounded-md shadow-sm border border-slate-200 font-semibold text-slate-700">🧹 2x Schmutzli</span>
+                            <span class="bg-white px-3 py-1.5 rounded-md shadow-sm border border-slate-200 font-semibold text-slate-700">🔧 1x Fz-Technik</span>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm text-sm text-slate-600 space-y-1.5 w-full md:w-auto">
+                        <p class="flex items-center gap-2"><span class="text-lg">🚛</span> <strong>Fahrzeug:</strong> Lkw Gisler Transporte</p>
+                        <p class="flex items-center gap-2"><span class="text-lg">🎅</span> <strong>Samichlaus:</strong> Damian Walker (Besetzt)</p>
+                    </div>
                 </div>
             </div>
 
+            <!-- Formular -->
             <div class="p-8">
-                <form id="castingForm" class="space-y-5">
-                    <div>
-                        <label for="name" class="block text-sm font-bold text-gray-700 mb-2">Vorname & Name</label>
-                        <input type="text" id="name" required placeholder="Gibli & Kari..." class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-red-800 focus:ring-1 focus:ring-red-800 transition-colors bg-gray-50">
+                <form id="castingForm" class="grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
+                    <div class="md:col-span-5">
+                        <label for="name" class="block text-sm font-bold text-slate-700 mb-2">Vorname & Name</label>
+                        <input type="text" id="name" required placeholder="Gibli & Kari..." class="w-full border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:border-red-800 focus:ring-2 focus:ring-red-800/20 transition-all bg-white shadow-sm">
                     </div>
                     
-                    <div>
-                        <label for="role" class="block text-sm font-bold text-gray-700 mb-2">Wunschrolle</label>
-                        <select id="role" required class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-red-800 focus:ring-1 focus:ring-red-800 transition-colors bg-gray-50 appearance-none cursor-pointer">
-                            <option value="" disabled selected>Bitte Rolle auswählen...</option>
+                    <div class="md:col-span-4">
+                        <label for="role" class="block text-sm font-bold text-slate-700 mb-2">Wunschrolle</label>
+                        <select id="role" required class="w-full border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:border-red-800 focus:ring-2 focus:ring-red-800/20 transition-all bg-white shadow-sm cursor-pointer">
+                            <option value="" disabled selected>Rolle wählen...</option>
                             <option value="Sicherheitsassistent">👮 Sicherheitsassistent/in</option>
                             <option value="Schmutzli">🧹 Schmutzli</option>
-                            <option value="Techniker">🔧 Fahrzeugtechnik Experte (Techniker)</option>
+                            <option value="Techniker">🔧 Fz-Technik (Techniker)</option>
                         </select>
                     </div>
 
-                    <button type="submit" class="w-full xmas-red text-white font-bold text-lg py-4 px-4 rounded-xl hover:bg-red-900 transform hover:scale-[1.02] transition-all duration-200 shadow-lg flex justify-center items-center gap-2 border border-red-950">
-                        <span>Jetzt eintragen</span>
-                        <span>✨</span>
-                    </button>
+                    <div class="md:col-span-3">
+                        <button type="submit" class="w-full bg-red-800 text-white font-bold text-base py-3 px-4 rounded-lg hover:bg-red-900 transition-all duration-200 shadow-md flex justify-center items-center gap-2 border border-red-950">
+                            <span>Eintragen</span>
+                            <span>✅</span>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
 
-        <!-- Skript Card -->
-        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border-2 border-gray-300">
-            <div class="bg-gray-100 p-4 border-b border-gray-200 flex justify-between items-center cursor-pointer hover:bg-gray-200 transition-colors" onclick="document.getElementById('scriptContent').classList.toggle('hidden')">
-                <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2"><span>🎬</span> Das Video-Skript (Entwurf) lesen</h2>
-                <span class="text-gray-500 text-sm font-bold">Aufklappen ▼</span>
+        <!-- Skript Card (Movie-Magic Edition) -->
+        <div class="glass-card rounded-2xl overflow-hidden">
+            <div class="bg-slate-100 p-5 border-b border-slate-200 flex justify-between items-center cursor-pointer hover:bg-slate-200 transition-colors" onclick="document.getElementById('scriptContent').classList.toggle('hidden')">
+                <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2"><span>🎬</span> Drehbuch: Movie-Magic Edition lesen</h2>
+                <span class="text-slate-500 text-sm font-bold flex items-center gap-1">Aufklappen <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></span>
             </div>
             
-            <div id="scriptContent" class="hidden p-6 custom-scrollbar max-h-96 overflow-y-auto bg-amber-50/30">
-                <div class="prose prose-sm max-w-none text-gray-700 space-y-4">
+            <div id="scriptContent" class="hidden p-6 md:p-8 custom-scrollbar max-h-[600px] overflow-y-auto bg-white">
+                <div class="max-w-3xl mx-auto space-y-8 text-slate-700">
                     
-                    <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200 shadow-sm mb-6 text-yellow-800">
-                        <strong>Hinweis:</strong> Dieses Skript ist ein erster Entwurf. Eure Vorschläge und guten Ideen werden jederzeit gerne gehört und können noch eingebaut werden!
-                    </div>
-
-                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm mb-6">
-                        <h4 class="font-bold text-gray-800 mb-2">Besetzung:</h4>
-                        <ul class="list-disc list-inside space-y-1">
-                            <li><strong>Kontrolleur (SiAss):</strong> Streng, pflichtbewusst, aber mit einem Schmunzeln.</li>
-                            <li><strong>Samichlaus:</strong> Die Ruhe selbst, cooler Auftritt, hat alles im Griff.</li>
-                            <li><strong>Schmutzli:</strong> Steht im Hintergrund und passt auf die Tasche auf.</li>
+                    <!-- Regie Tipps -->
+                    <div class="bg-amber-50 p-5 rounded-xl border border-amber-200 shadow-sm">
+                        <h4 class="font-bold text-amber-900 mb-3 flex items-center gap-2"><span>🎥</span> Kamera- & Illusions-Tipps (Der "Fahrende" Lkw)</h4>
+                        <ul class="list-none space-y-2 text-sm text-amber-800">
+                            <li class="flex items-start gap-2"><strong>1. Keine Totalen:</strong> Vermeide Aufnahmen, die den ganzen Lkw und die Strasse zeigen. Arbeite mit extremen Close-ups (Froschperspektive auf Reifen, Naheinstellung Kühlergrill).</li>
+                            <li class="flex items-start gap-2"><strong>2. Framing:</strong> Schneide das Bild so ab, dass man die Kollegen, die ziehen oder stossen, nicht sieht.</li>
+                            <li class="flex items-start gap-2"><strong>3. Sounddesign (80% der Illusion):</strong> Motorbrummen, Knirschen auf Asphalt und Druckluftbremsen in der Postproduktion ergänzen die Bewegung im Kopf der Zuschauer.</li>
                         </ul>
                     </div>
 
-                    <h4 class="font-bold text-red-800 border-b border-red-200 pb-1 mt-6 text-lg">Szene 1: Die Ankunft</h4>
-                    <p class="italic text-gray-500">(Kamera zeigt kurz die Totale des Schwerverkehrszentrums Erstfeld bei Dämmerung. Im Hintergrund glänzt und blinkt ein festlich beleuchteter Laster (Gisler Transporte).)</p>
-                    <p><strong>Bild:</strong> Der leuchtende Samichlaus-Lastwagen rollt langsam auf das Gelände.<br>
-                    <strong>Bild:</strong> Ein Kontrolleur in Warnweste steht bereit, hebt die Kelle und winkt den Lkw professionell auf den Kontrollplatz. Der Motor bremst ab, die Lichter spiegeln sich auf dem nassen Boden.</p>
+                    <!-- Szene 1 -->
+                    <div class="border-l-4 border-red-800 pl-4">
+                        <span class="script-badge bg-red-100 text-red-800">Szene 1: Der Hook (Sek. 0-3)</span>
+                        <p class="mb-2"><strong>Bild:</strong> Low-Angle / Froschperspektive. Ein massiv beleuchteter Kühlergrill schiebt sich bedrohlich und extrem langsam (gezogen/gestossen) in den Rahmen. <span class="italic text-slate-500">(Tipp: Weitwinkelobjektiv nutzen)</span>.</p>
+                        <p class="mb-2"><strong>Audio:</strong> <span class="italic text-slate-500">[Postproduktion]</span> Lautes, tiefes Motorbrummen, Zischen der Druckluftbremsen.</p>
+                        <p><strong>Bild:</strong> Schneller Peitschenschwenk auf das Gesicht des Kontrolleurs. Kurze Verwirrung. Dann eiskaltes Umschalten in den Dienst-Modus, die beleuchtete Kelle wird zackig gehoben.</p>
+                    </div>
 
-                    <h4 class="font-bold text-red-800 border-b border-red-200 pb-1 mt-6 text-lg">Szene 2: Die Kontrolle (Das Comedy-Herzstück)</h4>
-                    <p class="italic text-gray-500">(Die Fahrerkabine. Der Kontrolleur tritt heran, klopft an die Scheibe. Der Samichlaus kurbelt das Fenster herunter.)</p>
-                    <p><strong>Kontrolleur:</strong> «Guten Abend. Allgemeine Schwerverkehrskontrolle. Einmal die Papiere bitte – Führerausweis und den Fahrzeugausweis.»<br>
-                    <strong>Samichlaus:</strong> <span class="italic text-gray-500">(Zückt gelassen ein golden schimmerndes Dokument und reicht es rüber)</span> «Guten Abend der Herr. Ist alles im grünen – beziehungsweise im roten Bereich.»<br>
-                    <strong>Kontrolleur:</strong> <span class="italic text-gray-500">(Wirft einen Blick auf den Ausweis, zieht eine Augenbraue hoch)</span> «Mal schauen... Name: Nikolaus. Vorname: Samichlaus. Geburtsdatum: Seit jeher. Gültigkeit: Unbeschränkt... Und der Kollege da hinten?»<br>
-                    <strong>Schmutzli:</strong> <span class="italic text-gray-500">(Nickt kurz grimmig, zeigt ebenfalls seinen Ausweis)</span><br>
-                    <strong>Kontrolleur:</strong> <span class="italic text-gray-500">(Schmunzelt kurz, bleibt aber im Dienst-Modus)</span> «Gut. Dann schauen wir uns gleich mal die Ladung an. Gefährliche Güter an Bord?»<br>
-                    <strong>Samichlaus:</strong> <span class="italic text-gray-500">(Antwortet trocken und absolut ernst)</span> «Nur eine grössere Menge Schokolade.»<br>
-                    <strong>Kontrolleur:</strong> «Verstanden. Machen wir den Kontrollgang.»</p>
-                    
-                    <p class="italic text-gray-500">(Schnitt auf die Ladefläche. Der Samichlaus öffnet die Tore – dahinter stapeln sich Jutesäcke und Geschenke.)</p>
-                    <p><strong>Bild:</strong> Nahaufnahme von Spanngurten, die straff über die Geschenke-Säcke gespannt sind.<br>
-                    <strong>Kontrolleur:</strong> <span class="italic text-gray-500">(Zieht an einem Gurt, prüft die Festigkeit)</span> «Sitzt bombenfest. Da verrutscht selbst im heftigsten Schneesturm nichts. Vorbildlich gesichert.»</p>
-                    
-                    <p class="italic text-gray-500">(Schnitt zurück zum Schreibtisch / Klemmbrett im SVZ-Büro oder draussen am Wagen.)</p>
-                    <p><strong>Kontrolleur:</strong> <span class="italic text-gray-500">(Schreibt den Kontrollrapport, blickt auf)</span> «So, ich bin durch. Ich trage ein: Beanstandungen... keine. Bemerkung: jedoch leichter Guetzli-Überschuss.» <span class="italic text-gray-500">(Nimmt sich grinsend ein Guetzli aus einer Schachtel, die der Chlaus anbietet, und beisst ab)</span>.</p>
+                    <!-- Szene 2 -->
+                    <div class="border-l-4 border-slate-300 pl-4">
+                        <span class="script-badge bg-slate-200 text-slate-700">Szene 2: Die Papiere (Sek. 3-12)</span>
+                        <p class="mb-2"><strong>Bild:</strong> Naheinstellung Fahrerkabine. Kontrolleur leuchtet mit Taschenlampe hinauf. Fenster ist unten.</p>
+                        <p class="mb-2"><strong>Kontrolleur:</strong> <span class="italic text-slate-500">(Streng, trocken)</span> «Guten Abend. Schwerverkehrskontrolle Erstfeld. Führer- und Fahrzeugausweis, bitte.»</p>
+                        <p class="mb-2"><strong>Samichlaus:</strong> <span class="italic text-slate-500">(Tiefenentspannt)</span> «Alles im roten Bereich, Herr Wachtmeister.» <span class="italic text-slate-500">(Reicht goldenes Dokument)</span>.</p>
+                        <p class="mb-2"><strong>Bild:</strong> Schneller Schnitt auf Schmutzli. Starrt regungslos in die Kamera. Hält eine rot-weisse Zuckerstange wie eine Zigarre.</p>
+                        <p class="mb-2"><strong>Kontrolleur:</strong> <span class="italic text-slate-500">(Liest monoton ab)</span> «Name: Nikolaus... Gefährliche Güter geladen?»</p>
+                        <p class="mb-2"><strong>Samichlaus:</strong> <span class="italic text-slate-500">(Trocken)</span> «Nur 40 Tonnen Schokolade.»</p>
+                        <p><strong>Kontrolleur:</strong> <span class="italic text-slate-500">(Zieht Augenbraue hoch)</span> «Machen wir den Kontrollgang.»</p>
+                    </div>
 
-                    <h4 class="font-bold text-red-800 border-b border-red-200 pb-1 mt-6 text-lg">Szene 3: Erleichterung</h4>
-                    <p class="italic text-gray-500">(Naheinstellung auf beide)</p>
-                    <p><strong>Bild:</strong> Der Samichlaus und der Kontrolleur schauen sich an und strecken gleichzeitig den Daumen nach oben 👍.<br>
-                    <strong>Bild:</strong> Der Samichlaus lächelt freundlich und zufrieden in die Kamera.</p>
+                    <!-- Szene 3 -->
+                    <div class="border-l-4 border-slate-300 pl-4">
+                        <span class="script-badge bg-slate-200 text-slate-700">Szene 3: Offene Ladebrücke & ASMR (Sek. 12-20)</span>
+                        <p class="mb-2 italic text-slate-500">Schnelle, rhythmische Schnitte. Fokus auf extrem präsente Originalgeräusche.</p>
+                        <p class="mb-2"><strong>Schnitt 1:</strong> Dynamischer Schwenk entlang der offenen Ladebrücke. Ein bunter Berg aus Geschenken und Säcken thront auf der Fläche.</p>
+                        <p class="mb-2"><strong>Schnitt 2:</strong> <em>Klack, Klack, Zerr!</em> Nahaufnahme Hände Kontrolleur. Zerrt aggressiv an massiven Spanngurten über den Geschenken.</p>
+                        <p class="mb-2"><strong>Schnitt 3:</strong> <em>Rrrrtsch!</em> Schmutzli steht plötzlich stumm hinter den Geschenken und zieht misstrauisch den Reissverschluss einer Jute-Tasche zu.</p>
+                        <p><strong>Schnitt 4:</strong> <em>Klick-Klack!</em> Kugelschreiber schnappt auf, Kontrolleur hakt zackig seine Checkliste ab.</p>
+                    </div>
 
-                    <h4 class="font-bold text-red-800 border-b border-red-200 pb-1 mt-6 text-lg">Szene 4: Die Abfahrt</h4>
-                    <p><strong>Bild:</strong> Der Samichlaus winkt noch einmal kurz aus dem offenen Fenster.<br>
-                    <strong>Bild:</strong> Der leuchtende Lastwagen setzt sich in Bewegung, rollt vom SVZ-Gelände und fährt an der Kamera vorbei in die Nacht hinaus. <span class="italic text-gray-500">(Vielleicht hört man im Sounddesign ein dezentes Ho-Ho-Ho statt der normalen Lkw-Hupe)</span>.</p>
+                    <!-- Szene 4 -->
+                    <div class="border-l-4 border-slate-300 pl-4">
+                        <span class="script-badge bg-slate-200 text-slate-700">Szene 4: Das Fazit (Sek. 20-26)</span>
+                        <p class="mb-2"><strong>Bild:</strong> Zurück am Fenster der Fahrerkabine.</p>
+                        <p class="mb-2"><strong>Kontrolleur:</strong> «Beanstandungen: Keine. Ladung ist vorbildlich gesichert.»</p>
+                        <p class="mb-2"><strong>Samichlaus:</strong> <span class="italic text-slate-500">(Reicht offene Schachtel aus Fenster)</span> «Wie wär's mit etwas Proviant für die restliche Schicht?»</p>
+                        <p class="mb-2"><strong>Kontrolleur:</strong> <span class="italic text-slate-500">(Greift zu, beisst ab, kurzes Schmunzeln)</span> «Vermerk: Leichter Guetzli-Überschuss.»</p>
+                        <p><strong>Bild:</strong> Beide schauen sich an, strecken synchron den Daumen nach oben 👍.</p>
+                    </div>
 
-                    <h4 class="font-bold text-red-800 border-b border-red-200 pb-1 mt-6 text-lg">Szene 5: Finale</h4>
-                    <p><strong>Bild:</strong> Die roten Rücklichter verschwinden in der Dunkelheit.<br>
-                    <strong>Tafel / eingeblendeter Text:</strong> «Wir wünschen frohe Weihnachten und allzeit gute Fahrt!»<br>
-                    <span class="italic text-gray-500">(Logo / Hinweis auf die Kantonspolizei Uri / SVZ Erstfeld)</span></p>
+                    <!-- Szene 5 -->
+                    <div class="border-l-4 border-red-800 pl-4">
+                        <span class="script-badge bg-red-100 text-red-800">Szene 5: Abfahrt (Sek. 26-30)</span>
+                        <p class="mb-2"><strong>Bild:</strong> Extremes Close-Up auf grossen Reifen. Dreht sich langsam und rollt aus dem Bild (gezogen/gestossen).</p>
+                        <p class="mb-2"><strong>Audio:</strong> <span class="italic text-slate-500">[Postproduktion]</span> Mechanisch hallendes «HO-HO-HO»-Lkw-Horn ertönt wuchtig.</p>
+                        <p class="mb-2"><strong>Bild:</strong> Schnitt auf rote Rücklichter, die aufleuchten (Bremse drücken oder Licht einschalten).</p>
+                        <p class="mb-2"><strong>Text-Overlay:</strong> «Wir wünschen frohe Weihnachten und allzeit gute Fahrt!»</p>
+                        <p><strong>Abschluss:</strong> Logo Kantonspolizei Uri / SVZ Erstfeld.</p>
+                    </div>
+
                 </div>
             </div>
         </div>
 
-        <!-- Live-Liste Card -->
-        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden p-8 border-2 border-green-800">
-            <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold text-green-900 font-serif">Die Crew (Live)</h2>
-                <div class="h-1 w-24 bg-green-800 mx-auto mt-2 rounded-full"></div>
+        <!-- Live-Liste Crew -->
+        <div class="glass-card rounded-2xl overflow-hidden p-6 md:p-8">
+            <div class="flex justify-between items-center mb-6 border-b border-slate-200 pb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800">Crew Übersicht</h2>
+                    <p class="text-sm text-slate-500">Live-Anmeldungen für den Dreh</p>
+                </div>
+                <span class="flex h-3 w-3 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </span>
             </div>
             
-            <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
-                <!-- Spalte: Sicherheitsassistenten -->
-                <div class="bg-green-50 rounded-xl p-5 border border-green-100 shadow-inner">
-                    <h3 class="font-bold text-green-900 border-b-2 border-green-200 pb-2 mb-4 flex justify-between items-center">
+            <div class="grid lg:grid-cols-3 gap-6">
+                <!-- Spalte: SiAss -->
+                <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-slate-800 mb-4 flex justify-between items-center">
                         <span>👮 SiAss</span>
-                        <span class="bg-green-800 text-white text-xs px-2 py-1 rounded-full"><span id="count-sicher">0</span> / 3</span>
+                        <span class="bg-slate-800 text-white text-xs px-2.5 py-1 rounded-full"><span id="count-sicher">0</span> / 3</span>
                     </h3>
-                    <ul id="list-sicher" class="space-y-3 min-h-[3rem]">
-                        <li class="text-sm italic text-gray-400 text-center py-2">Wartet auf Einträge...</li>
-                    </ul>
+                    <ul id="list-sicher" class="space-y-2 min-h-[4rem]"></ul>
                 </div>
                 
                 <!-- Spalte: Schmutzli -->
-                <div class="bg-red-50 rounded-xl p-5 border border-red-100 shadow-inner">
-                    <h3 class="font-bold xmas-text-red border-b-2 border-red-200 pb-2 mb-4 flex justify-between items-center">
+                <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-slate-800 mb-4 flex justify-between items-center">
                         <span>🧹 Schmutzli</span>
-                        <span class="xmas-red text-white text-xs px-2 py-1 rounded-full"><span id="count-schmutzli">0</span> / 2</span>
+                        <span class="bg-slate-800 text-white text-xs px-2.5 py-1 rounded-full"><span id="count-schmutzli">0</span> / 2</span>
                     </h3>
-                    <ul id="list-schmutzli" class="space-y-3 min-h-[3rem]">
-                        <li class="text-sm italic text-gray-400 text-center py-2">Wartet auf Einträge...</li>
-                    </ul>
+                    <ul id="list-schmutzli" class="space-y-2 min-h-[4rem]"></ul>
                 </div>
 
                 <!-- Spalte: Techniker -->
-                <div class="bg-blue-50 rounded-xl p-5 border border-blue-100 shadow-inner md:col-span-2 lg:col-span-1">
-                    <h3 class="font-bold text-blue-900 border-b-2 border-blue-200 pb-2 mb-4 flex justify-between items-center">
+                <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-slate-800 mb-4 flex justify-between items-center">
                         <span>🔧 Fz-Technik</span>
-                        <span class="bg-blue-800 text-white text-xs px-2 py-1 rounded-full"><span id="count-technik">0</span> / 1</span>
+                        <span class="bg-slate-800 text-white text-xs px-2.5 py-1 rounded-full"><span id="count-technik">0</span> / 1</span>
                     </h3>
-                    <ul id="list-technik" class="space-y-3 min-h-[3rem]">
-                        <li class="text-sm italic text-gray-400 text-center py-2">Wartet auf Einträge...</li>
-                    </ul>
+                    <ul id="list-technik" class="space-y-2 min-h-[4rem]"></ul>
                 </div>
             </div>
         </div>
 
         <!-- Versteckter Admin Button -->
-        <div class="text-center mt-4 pb-8">
-            <button id="adminLogin" class="text-white/30 hover:text-white/80 transition-colors text-sm">🔒</button>
+        <div class="text-center pb-6">
+            <button id="adminLogin" class="text-slate-500 hover:text-white transition-colors text-xs font-semibold px-4 py-2 rounded-full hover:bg-slate-800/50">🔒 Admin Zugang</button>
         </div>
     </div>
 
-    <!-- Schnee Generator -->
+    <!-- Schnee Generator JS -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const symbols = ['❄️', '❄️', '🍪', '❄️', '⭐', '❄️'];
             const container = document.body;
-            const amount = window.innerWidth < 768 ? 20 : 45;
+            const amount = window.innerWidth < 768 ? 30 : 60; // Mehr Schnee, da Punkte dezenter sind
 
             for (let i = 0; i < amount; i++) {
                 let el = document.createElement('div');
-                el.className = 'falling-item';
-                el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                el.className = 'snow-flake';
+                // Zufällige Größe zwischen 3px und 7px
+                const size = Math.random() * 4 + 3;
+                el.style.width = size + 'px';
+                el.style.height = size + 'px';
                 el.style.left = Math.random() * 100 + 'vw';
-                el.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                el.style.animationDuration = (Math.random() * 8 + 5) + 's'; // Langsamerer Fall
                 el.style.animationDelay = (Math.random() * 5) + 's';
-                el.style.fontSize = (Math.random() * 1.5 + 0.8) + 'rem';
-                el.style.opacity = (Math.random() * 0.6 + 0.4).toString();
                 container.appendChild(el);
             }
         });
     </script>
 
-    <!-- Firebase SDK & Logik -->
+    <!-- Firebase SDK & Logik (Unverändert) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -254,7 +290,7 @@
         document.getElementById('adminLogin').addEventListener('click', () => {
             if (document.body.classList.contains('admin-mode')) {
                 document.body.classList.remove('admin-mode');
-                document.getElementById('adminLogin').innerText = "🔒";
+                document.getElementById('adminLogin').innerText = "🔒 Admin Zugang";
                 return;
             }
             const pin = prompt("Admin Passwort eingeben:");
@@ -268,7 +304,7 @@
 
         // Löschen-Funktion
         window.deleteEntry = async (id) => {
-            if(confirm("Möchtest du diese Person wirklich löschen?")) {
+            if(confirm("Möchtest du diese Person wirklich aus der Crew löschen?")) {
                 try {
                     await deleteDoc(doc(db, "reel_signups", id));
                 } catch(e) {
@@ -286,7 +322,7 @@
             const originalText = btn.innerHTML;
             
             btn.disabled = true;
-            btn.innerHTML = "<span>Speichert... 🎅</span>";
+            btn.innerHTML = "<span>Wird eingetragen... ⏳</span>";
 
             try {
                 await addDoc(signupsRef, {
@@ -322,15 +358,20 @@
             snapshot.forEach((doc) => {
                 const data = doc.data();
                 const li = document.createElement('li');
-                li.className = "bg-white px-4 py-3 rounded-lg border border-gray-100 shadow-sm flex justify-between items-center gap-2";
+                li.className = "bg-white px-3 py-2.5 rounded-lg border border-slate-200 flex justify-between items-center gap-2 group";
+                
+                let timeString = 'Neu';
+                if (data.timestamp) {
+                    timeString = new Date(data.timestamp.toDate()).toLocaleTimeString('de-CH', {hour: '2-digit', minute:'2-digit'});
+                }
                 
                 li.innerHTML = `
                     <div class="flex-1 overflow-hidden">
-                        <span class="font-bold text-gray-800 break-words">${data.name}</span> 
-                        <span class="text-xs text-gray-400 font-medium bg-gray-50 px-2 py-1 rounded ml-2 whitespace-nowrap">${data.timestamp ? new Date(data.timestamp.toDate()).toLocaleTimeString('de-CH', {hour: '2-digit', minute:'2-digit'}) : 'Neu'}</span>
+                        <span class="font-semibold text-slate-700 text-sm truncate block">${data.name}</span> 
+                        <span class="text-[10px] text-slate-400 font-medium">${timeString}</span>
                     </div>
-                    <button onclick="deleteEntry('${doc.id}')" class="delete-btn bg-red-100 text-red-700 hover:bg-red-200 px-2 py-1 rounded text-xs font-bold shrink-0 transition-colors">
-                        Löschen
+                    <button onclick="deleteEntry('${doc.id}')" class="delete-btn bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 p-1.5 rounded-md text-xs font-bold shrink-0 transition-colors border border-red-100">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                     </button>
                 `;
                 
@@ -350,9 +391,10 @@
             document.getElementById('count-schmutzli').innerText = countSchmutzli;
             document.getElementById('count-technik').innerText = countTechnik;
 
-            if(countSicher === 0) listSicher.innerHTML = '<li class="text-sm italic text-gray-400 text-center py-2">Noch keine Einträge</li>';
-            if(countSchmutzli === 0) listSchmutzli.innerHTML = '<li class="text-sm italic text-gray-400 text-center py-2">Noch keine Einträge</li>';
-            if(countTechnik === 0) listTechnik.innerHTML = '<li class="text-sm italic text-gray-400 text-center py-2">Noch keine Einträge</li>';
+            const emptyState = '<li class="text-xs text-slate-400 text-center py-3 bg-slate-50/50 rounded-lg border border-dashed border-slate-200">Noch keine Einträge</li>';
+            if(countSicher === 0) listSicher.innerHTML = emptyState;
+            if(countSchmutzli === 0) listSchmutzli.innerHTML = emptyState;
+            if(countTechnik === 0) listTechnik.innerHTML = emptyState;
         });
     </script>
 </body>
